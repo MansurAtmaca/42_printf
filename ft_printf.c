@@ -16,6 +16,10 @@ int formats(va_list args, char c)
         return (ft_putstr(va_arg(args, char *)));
     if (c == 'd')
         return (ft_putnbr(va_arg(args, int)));
+    if (c == 'x')
+        return (ft_hex(va_arg(args, int),c));
+    if (c == 'X')
+        return (ft_hex(va_arg(args, int),c));
     return (0);
 }
 int ft_printf(const char *format,...)
@@ -44,5 +48,5 @@ int ft_printf(const char *format,...)
 
 int main()
 {
-    ft_printf("%d",453233);
+    ft_printf("%x\n",34343);
 }

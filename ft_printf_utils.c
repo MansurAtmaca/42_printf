@@ -1,9 +1,5 @@
 #include "ft_printf.h"
 
-int ft_putchar(char c)
-{
-    return (write(1, &c, 1));
-}
 int ft_putstr(char *str)
 {
     int i;
@@ -50,7 +46,7 @@ int ft_hex(int n, char c)
     len = 0;
     if (n >= 16)
         len = ft_hex(n / 16, c);
-    if(c == 'x')
+    if (c == 'x')
     {
         ft_putchar("0123456789abcdef"[n % 16]);
     }
@@ -59,4 +55,34 @@ int ft_hex(int n, char c)
         ft_putchar("0123456789ABCDEF"[n % 16]);
     }
     return (len + 1);
+}
+int ft_decimal(int n, char c)
+{
+    int len;
+
+    len = 0;
+    if (n >= 10)
+        len = ft_decimal(n / 10, c);
+    if (c == 'i')
+    {
+        ft_putchar("0123456789"[n % 10]);
+    }
+    return (len + 1);
+}
+int ft_pointer(unsigned long num, int check)
+{
+    int i;
+
+
+    i = 0;
+    if (check){
+        write(1, "0x", 2);
+        i += 2;
+    }
+i += ft_hex(num,'x');
+      return(i); 
+}
+int ft_unsign(unsigned int num)
+{
+    return (ft_putnbr(num));
 }

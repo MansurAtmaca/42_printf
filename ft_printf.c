@@ -41,29 +41,32 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		i;
 	int		len;
-	int		res;
+	int tmp;
 
 	va_start(args, format);
 	i = 0;
 	len = 0;
-	res = 0;
+	tmp = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			len += formats(args, format[i]);
+			tmp = formats(args, format[i]);
+			if (tmp == -1)
+				return (-1);
+			len += tmp;
 		}
 		else
-			len += ft_putchar(format[i]);
+		{
+			tmp = ft_putchar(format[i]);
+			if (tmp == -1)
+				return (-1);
+			len += tmp;
+		}
 		i++;
 	}
 	va_end(args);
 	return (len);
 }
-#include <stdio.h>
-int main()
-{
-	int i=ft_printf("\001\002\007\v\010\f\r\n");
-	printf("sonuc: %d",i);
-}
+/*  */

@@ -6,13 +6,13 @@
 /*   By: matmaca <matmaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:37:30 by matmaca           #+#    #+#             */
-/*   Updated: 2023/10/26 13:39:51 by matmaca          ###   ########.fr       */
+/*   Updated: 2023/11/07 14:49:16 by matmaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static	int	find_digit(int n)
+int	find_digit(int n)
 {
 	int	i;
 

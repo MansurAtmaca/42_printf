@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matmaca <matmaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 14:43:36 by matmaca           #+#    #+#             */
-/*   Updated: 2023/11/07 16:43:19 by matmaca          ###   ########.fr       */
+/*   Created: 2023/11/07 15:27:34 by matmaca           #+#    #+#             */
+/*   Updated: 2023/11/07 15:34:17 by matmaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
-# include <stdarg.h>
+#include "ft_printf.h"
 
-int		ft_printf(const char *format, ...);
-int		ft_putchar(char c);
-int		ft_putstr(char *str);
-int		ft_putnbr(int n);
-int		ft_hex(unsigned int n, char c);
-int		ft_decimal(int n, char c);
-int		ft_pointer(unsigned long int num, int check);
-int		ft_unsign(unsigned int num);
-char	*ft_itoa(int n);
-
-#endif
+int main()
+{
+	int a = 5;
+	ft_printf("%p",&a);
+}

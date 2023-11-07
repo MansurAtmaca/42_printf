@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+char *ft_itoa(int n);
 int ft_putchar(char c);
 int ft_putstr(char *str);
 int ft_putnbr(int n);

@@ -3,13 +3,13 @@ int ft_putchar(char c)
 {
     return (write(1, &c, 1));
 }
-/*  static int check_format(char c)
+ static int check_format(char c)
 {
     if (c == 'c' || c == 's' || c == 'p' || c == 'i' || c == 'd' || c == 'u' || c == 'x' || c == 'X' || c == '%')
         return (1);
     else
         return (0);
-} */ 
+}
 static int formats(va_list args, char c)
 {
     if (c == 'c')
@@ -36,29 +36,26 @@ int ft_printf(const char *format, ...)
     va_start(args, format);
     int i;
     int len;
+    int res;
 
     i = 0;
     len = 0;
-
+    res = 0;
     while (format[i] != '\0')
-    { 
-        if (format[i] == '%')
+    {
+        if (format[i] == '%' && check_format(format[i + 1]))
         {
             i++;
-            len += formats(args, format[i]);
+            res = formats(args, format[i]);
+            if(res == -1)
+                return (-1);
+            else
+                len += res;
         }
         else if (format[i] != '\0')
-        {
             len += ft_putchar(format[i]);
-        }
         i++;
     }
-
     va_end(args);
     return (len);
-}
-int main() {
-
- ft_printf("%cs%cs%c\n", 'c', 'b', 'a');
- ft_printf("%cc%cc%c\n", 'a', '\t', 'b');
 }

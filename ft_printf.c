@@ -6,7 +6,7 @@
 /*   By: matmaca <matmaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:22:37 by matmaca           #+#    #+#             */
-/*   Updated: 2023/11/07 17:01:57 by matmaca          ###   ########.fr       */
+/*   Updated: 2023/11/08 13:23:14 by matmaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 int	ft_putchar(char c)
 {
-		return (write(1, &c, 1));
+	return (write(1, &c, 1));
+}
+
+static int	ft_check_flag(char c)
+{
+	if (c == 'c' || c == 'd' || c == 'i' || c == 'u' || c == '%'
+		|| c == 's' || c == 'x' || c == 'X' || c == 'p')
+		return (1);
+	return (0);
 }
 
 static int	formats(va_list args, char c)
@@ -27,46 +35,57 @@ static int	formats(va_list args, char c)
 		return (ft_putnbr(va_arg(args, int)));
 	if (c == 'x' || c == 'X')
 		return (ft_hex(va_arg(args, int), c));
-	if (c == '%')
-		return (write(1, "%%", 1));
 	if (c == 'p')
 		return (ft_pointer(va_arg(args, unsigned long int), 1));
 	if (c == 'u')
 		return (ft_unsign(va_arg(args, unsigned int)));
+	if (c == '%')
+	{
+		if (ft_putchar('%') < 0)
+			return (-1);
+		return (1);
+	}
 	return (-1);
 }
 
-int	ft_printf(const char *format, ...)
+int	check(const char *format, va_list args, int res)
 {
-	va_list	args;
+	int		tmp;
 	int		i;
-	int		len;
-	int tmp;
 
-	va_start(args, format);
-	i = 0;
-	len = 0;
 	tmp = 0;
+	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && ft_check_flag(format[i + 1]))
 		{
-			i++;
-			tmp = formats(args, format[i]);
+			tmp = formats(args, format[++i]);
 			if (tmp == -1)
 				return (-1);
-			len += tmp;
+			res += tmp;
 		}
 		else
 		{
 			tmp = ft_putchar(format[i]);
 			if (tmp == -1)
 				return (-1);
-			len += tmp;
+			res += tmp;
 		}
 		i++;
 	}
-	va_end(args);
-	return (len);
+	return (res);
 }
-/*  */
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		res;
+
+	va_start(args, format);
+	res = 0;
+	res = check(format, args, res);
+	if (res < 0)
+		return (-1);
+	va_end(args);
+	return (res);
+}

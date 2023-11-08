@@ -6,12 +6,13 @@
 /*   By: matmaca <matmaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:37:30 by matmaca           #+#    #+#             */
-/*   Updated: 2023/11/08 13:54:25 by matmaca          ###   ########.fr       */
+/*   Updated: 2023/11/08 14:00:12 by matmaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 int	ft_putstr(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: matmaca <matmaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:22:37 by matmaca           #+#    #+#             */
-/*   Updated: 2023/11/08 13:59:35 by matmaca          ###   ########.fr       */
+/*   Updated: 2023/12/08 13:12:00 by matmaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_putchar(char c)
 
 static int	ft_check_flag(char c)
 {
-	if (c == 'c' || c == 'd' || c == 'i' || c == 'u' || c == '%'
-		|| c == 's' || c == 'x' || c == 'X' || c == 'p')
+	if ((c == 'c' || c == 'd' || c == 'i' || c == 'u'
+			|| c == '%' || c == 's' || c == 'x' || c == 'X' || c == 'p'))
 		return (1);
 	return (0);
 }
@@ -42,11 +42,7 @@ static int	formats(va_list args, char c)
 	if (c == 'u')
 		return (ft_unsign(va_arg(args, unsigned int)));
 	if (c == '%')
-	{
-		if (ft_putchar('%') < 0)
-			return (-1);
-		return (1);
-	}
+		return (write(1, &"%", 1));
 	return (-1);
 }
 
@@ -68,7 +64,8 @@ int	check(const char *format, va_list args, int res)
 		}
 		else
 		{
-			tmp = ft_putchar(format[i]);
+			if (format[i] != '%')
+				tmp = ft_putchar(format[i]);
 			if (tmp == -1)
 				return (-1);
 			res += tmp;
